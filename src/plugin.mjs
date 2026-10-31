@@ -10,11 +10,11 @@ import {
   playgroundModels,
 } from "./models.mjs"
 
-export async function MercuryPlugin(input) {
+export async function InceptionPlugin(input) {
   const log = async (level, message) => {
     try {
       await input?.client?.app?.log({
-        body: { service: "magpie-provider-mercury", level, message },
+        body: { service: "magpie-provider-inception", level, message },
       })
     } catch {
       /* logging is best effort */
@@ -28,7 +28,7 @@ export async function MercuryPlugin(input) {
     config: async (cfg) => {
       cfg.provider ??= {}
       const provider = (cfg.provider[PROVIDER] ??= {})
-      provider.name ??= "Inception (Mercury)"
+      provider.name ??= "Inception"
       provider.npm ??= SDK
       provider.api ??= API_BASE
       provider.models ??= {}

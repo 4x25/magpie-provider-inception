@@ -68,13 +68,13 @@ function whoOf(auth) {
 
 function newAuth(key, all) {
   const hash = accountID(key).split("mercury-")[1]
-  const label = key === PLAYGROUND_KEY ? "Mercury Playground" : key.length >= 12 ? `API key …${key.slice(-4)}` : "API key"
+  const label = key === PLAYGROUND_KEY ? "Inception Playground" : key.length >= 12 ? `API key …${key.slice(-4)}` : "API key"
   const names = new Set(Object.values(all).map(whoOf).filter((v) => typeof v === "string").map((v) => v.toLowerCase()))
   for (let n = 12; n <= hash.length; n += 4) {
     const accountId = `${label} (${hash.slice(0, n)})`
     if (!names.has(accountId.toLowerCase())) return { type: "api", key, accountId }
   }
-  throw new Error("A Mercury account name is already in use. No keys were imported.")
+  throw new Error("An Inception account name is already in use. No keys were imported.")
 }
 
 function cleanAuth(auth) {
@@ -136,7 +136,7 @@ export function keyImporter(input = {}) {
         if (existing.has(key)) continue
         const id = accountID(key)
         if (Object.hasOwn(all, id)) {
-          throw new Error("A Mercury account identifier is already in use. No keys were imported.")
+          throw new Error("An Inception account identifier is already in use. No keys were imported.")
         }
         const auth = newAuth(key, all)
         all[id] = auth

@@ -14,7 +14,7 @@ const B = "sk_example_B2222"
 const C = "sk_example_C3333"
 
 function magpie(t, initial = {}, storage = {}) {
-  const directory = mkdtempSync(join(tmpdir(), "mercury-accounts-"))
+  const directory = mkdtempSync(join(tmpdir(), "inception-accounts-"))
   t.after(() => rmSync(directory, { recursive: true, force: true }))
   const file = join(directory, "plugin-auth.json")
   const read = () => JSON.parse(readFileSync(file, "utf8"))
@@ -204,6 +204,7 @@ test("an interrupted completion leaves one usable account and retry adds no dupl
 test("playground remains one native account across spelling variants", async (t) => {
   const host = magpie(t)
   await host.login(` PlayGround, ${A}, PLAYGROUND `)
+  assert.match(host.read()[PROVIDER].accountId, /^Inception Playground \([a-f0-9]{12}\)$/)
   const before = Object.keys(host.read()).sort()
   assert.equal((await host.login(" PLAYGROUND ")).kept, PROVIDER)
   assert.deepEqual(Object.keys(host.read()).sort(), before)

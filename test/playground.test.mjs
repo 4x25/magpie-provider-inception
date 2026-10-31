@@ -150,7 +150,7 @@ test("messageOf unwraps FastAPI's detail", () => {
     "first; second",
   )
   assert.equal(messageOf("error code: 502", 502), "error code: 502")
-  assert.equal(messageOf("", 500), "Mercury's playground answered HTTP 500")
+  assert.equal(messageOf("", 500), "Inception's playground answered HTTP 500")
 })
 
 test("errorResponse keeps a 4xx and turns a 5xx into 502", async () => {

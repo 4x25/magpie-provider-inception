@@ -1,4 +1,4 @@
-// The Mercury playground (the endpoint behind Inception's own web playground)
+// The Inception playground (the endpoint behind Inception's own web playground)
 // speaks a small OpenAI-compatible subset. This module adapts one Chat
 // Completions request to it and normalizes what comes back:
 //
@@ -80,8 +80,8 @@ function toolResponse(param) {
   // Magpie recognizes these as request-shape refusals: it tries the next
   // account without resting the playground or changing its sign-in state.
   const message = param === "messages"
-    ? "Unknown item type: tool call or tool result in Mercury Playground messages. Use an enabled Inception API key for tool requests."
-    : `Unknown parameter: '${param}' for Mercury Playground. Use an enabled Inception API key for tool requests.`
+    ? "Unknown item type: tool call or tool result in Inception Playground messages. Use an enabled Inception API key for tool requests."
+    : `Unknown parameter: '${param}' for Inception Playground. Use an enabled Inception API key for tool requests.`
   return new Response(JSON.stringify({
     error: {
       message,
@@ -440,7 +440,7 @@ export function messageOf(text, status = 0) {
   const message = messageIn(body)
   if (message) return message
   if (raw && raw.length <= 1000) return raw
-  return `Mercury's playground answered HTTP ${status || 502}`
+  return `Inception's playground answered HTTP ${status || 502}`
 }
 
 function messageIn(body) {

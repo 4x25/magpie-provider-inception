@@ -1,7 +1,7 @@
 {
-  "name": "magpie-provider-mercury",
+  "name": "magpie-provider-inception",
   "version": "0.2.3",
-  "description": "Inception Labs Mercury provider plugin for Magpie: use your own API keys or the free Mercury playground",
+  "description": "Inception Labs provider plugin for Magpie: use your own API keys or the free Inception playground",
   "type": "module",
   "main": "./index.mjs",
   "files": [
@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/4x25/magpie-provider-mercury.git"
+    "url": "git+https://github.com/4x25/magpie-provider-inception.git"
   },
   "scripts": {
     "test": "node --test",

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import { readFileSync } from "node:fs"
 import test from "node:test"
 
 import plugin, { _internal } from "../index.mjs"
@@ -7,12 +8,20 @@ const { API_BASE, PLAYGROUND_BASE, PROVIDER, isPlaygroundAuth, KEYS_INPUT, KEYS_
 
 const hooks = () => plugin({ client: { app: { log: async () => {} } } })
 
+test("package metadata and the entry point use the Inception plugin name", () => {
+  const manifest = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"))
+  assert.equal(manifest.name, "magpie-provider-inception")
+  assert.equal(manifest.repository.url, "git+https://github.com/4x25/magpie-provider-inception.git")
+  assert.equal(plugin.name, "InceptionPlugin")
+  assert.equal(PROVIDER, "inception")
+})
+
 test("the plugin declares the Inception provider with its models", async () => {
   const { config } = await hooks()
   const cfg = { provider: {} }
   await config(cfg)
   const provider = cfg.provider[PROVIDER]
-  assert.equal(provider.name, "Inception (Mercury)")
+  assert.equal(provider.name, "Inception")
   assert.equal(provider.npm, "@ai-sdk/openai-compatible")
   assert.equal(provider.api, API_BASE)
   assert.deepEqual(Object.keys(provider.models), [
@@ -130,9 +139,13 @@ test("a failed model list keeps the known one and says it fell back", async (t) 
   })
   globalThis.fetch = async () => new Response("down", { status: 503 })
 
-  const { provider } = await hooks()
+  const logs = []
+  const { provider } = await plugin({ client: { app: { log: async (entry) => logs.push(entry) } } })
   const given = { "mercury-3": { id: "mercury-3" } }
   const models = await provider.models({ models: given }, { auth: { type: "api", key: "sk_test" } })
   assert.equal(models[Symbol.for("magpie.fellBack")], true)
   assert.ok(models["mercury-3"])
+  assert.equal(logs.length, 1)
+  assert.equal(logs[0].body.service, "magpie-provider-inception")
+  assert.equal(logs[0].body.level, "warn")
 })

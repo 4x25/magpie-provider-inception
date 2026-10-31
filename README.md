@@ -1,15 +1,15 @@
-# Magpie Mercury Provider
+# Magpie Inception Provider
 
 [简体中文](README.zh-CN.md)
 
-Use **Inception Labs Mercury** models in [Magpie](https://usemagpie.ai). Sign in with one or more Inception API keys, or enter `playground` to try Mercury through Inception's official Playground service.
+Use **Inception Labs** models, including **Mercury**, in [Magpie](https://usemagpie.ai). Sign in with one or more Inception API keys, or enter `playground` to try the models through Inception's official Playground service.
 
 ## Quick start
 
 With Magpie 0.1.1323 or later installed, run:
 
 ```bash
-magpie plugin add github:4x25/magpie-provider-mercury
+magpie plugin add github:4x25/magpie-provider-inception
 magpie plugin login inception
 magpie provider test inception
 ```
@@ -19,10 +19,10 @@ When prompted, enter one or more API keys separated by commas or spaces, or ente
 To install a local clone instead:
 
 ```bash
-magpie plugin add /path/to/magpie-provider-mercury
+magpie plugin add /path/to/magpie-provider-inception
 ```
 
-In the app, open **Plugins → Add a plugin**, enter the GitHub spec or local folder, and sign in to **Inception (Mercury)**.
+In the app, open **Plugins → Add a plugin**, enter the GitHub spec or local folder, and sign in to **Inception**.
 
 ## Sign-in options
 
@@ -44,7 +44,7 @@ sk_example_A, sk_example_B sk_example_A
 
 Surrounding whitespace and empty entries are removed, and duplicate keys are kept only once. API keys retain their original capitalization. Importing a key already saved for Inception reuses its existing account, including its settings. Each account name shows the key's final four characters and a short fingerprint so keys with the same ending remain distinct.
 
-Each unique key appears as a separate account under **Inception (Mercury)**. Use Magpie's account controls to choose the first account or enable and disable additional accounts. Magpie records each account's request usage when the API reports it, and its native routing can fail over to another enabled account after a refusal or rate limit. The plugin stores individual credentials, not a joined key list.
+Each unique key appears as a separate account under **Inception**. Use Magpie's account controls to choose the first account or enable and disable additional accounts. Magpie records each account's request usage when the API reports it, and its native routing can fail over to another enabled account after a refusal or rate limit. The plugin stores individual credentials, not a joined key list.
 
 List the accounts in the terminal:
 
